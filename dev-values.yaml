@@ -1,0 +1,49 @@
+common:
+  containerRegistryURL: todoappacr2ly.azurecr.io
+  ingressClass: nginx
+  
+ui:
+  replicas: 2
+  image:
+    name: todo-ui
+    tag: v4
+  port: 80
+  ServicePort: 80
+  ingress:
+    host: dev-ui.rajnish.store
+
+getTask:
+  replicas: 2
+  image:
+    name: update-tasks
+    tag: v1
+  port: 8000
+  ServicePort: 80
+  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=tcp:todo-sql-server-007.database.windows.net,1433;Database=todo;Uid=sqladminuser;Pwd=abcd@@@!!!1234;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+  ingress:
+    host: dev-get-tasks-api.rajnish.store
+    ingressClass: nginx
+
+deleteTask:
+  replicas: 2
+  image:
+    name: delete-tasks
+    tag: v1
+  port: 8000
+  ServicePort: 80
+  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=tcp:todo-sql-server-007.database.windows.net,1433;Database=todo;Uid=sqladminuser;Pwd=abcd@@@!!!1234;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+  ingress:
+    host: dev-delete-task-api.rajnish.store
+    ingressClass: nginx
+
+addTask:
+  replicas: 2
+  image:
+    name: add-tasks
+    tag: v1
+  port: 8000
+  ServicePort: 80
+  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=tcp:todo-sql-server-007.database.windows.net,1433;Database=todo;Uid=sqladminuser;Pwd=abcd@@@!!!1234;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+  ingress:
+    host: dev-add-task-api.rajnish.store
+    ingressClass: nginx
